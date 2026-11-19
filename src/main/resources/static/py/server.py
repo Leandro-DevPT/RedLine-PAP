@@ -1,7 +1,7 @@
 """Local Redline API and static-file server.
 
-Run on Windows without extra setup, or configure REDLINE_ADMIN_KEY_FILE,
-REDLINE_SESSION_SECRET_FILE, and optionally REDLINE_DATA_DIR.
+Run on Windows without extra setup, or configure REDLINE_ADMIN_KEY / REDLINE_SESSION_SECRET
+(or their *_FILE equivalents), and optionally REDLINE_DATA_DIR.
 """
 import hashlib
 import base64
@@ -36,6 +36,10 @@ LOCAL_SECRET_NAMES = {
     "REDLINE_ADMIN_KEY_FILE": "admin_key",
     "REDLINE_SESSION_SECRET_FILE": "session_secret",
 }
+SECRET_VALUE_NAMES = {
+    "REDLINE_ADMIN_KEY_FILE": "REDLINE_ADMIN_KEY",
+    "REDLINE_SESSION_SECRET_FILE": "REDLINE_SESSION_SECRET",
+}
 
 
 def local_secret_path(environment_variable):
@@ -66,21 +70,36 @@ def create_local_secret(secret_path):
 
 def read_required_secret(environment_variable):
     configured_path = os.environ.get(environment_variable)
-    if not configured_path or not str(configured_path).strip():
-        secret_path = local_secret_path(environment_variable)
-        create_local_secret(secret_path)
-    else:
+    if configured_path and str(configured_path).strip():
         secret_path = Path(configured_path).expanduser()
-    try:
-        value = secret_path.read_text(encoding="utf-8").strip()
-    except OSError as error:
-        raise RuntimeError(
-            f"Não foi possível ler o segredo indicado por {environment_variable}: {secret_path}"
-        ) from error
+        try:
+            value = secret_path.read_text(encoding="utf-8").strip()
+        except OSError as error:
+            raise RuntimeError(
+                f"Não foi possível ler o segredo indicado por {environment_variable}: {secret_path}"
+            ) from error
+    else:
+        value_name = SECRET_VALUE_NAMES[environment_variable]
+        value = os.environ.get(value_name, "").strip()
+        if not value:
+            if os.name == "nt":
+                secret_path = local_secret_path(environment_variable)
+                create_local_secret(secret_path)
+                try:
+                    value = secret_path.read_text(encoding="utf-8").strip()
+                except OSError as error:
+                    raise RuntimeError(
+                        f"Não foi possível ler o segredo indicado por {environment_variable}: {secret_path}"
+                    ) from error
+            else:
+                raise RuntimeError(
+                    f"Configura {value_name} com o segredo ou {environment_variable} "
+                    "com o caminho de um ficheiro de segredo."
+                )
 
     if len(value) < 32:
         raise RuntimeError(
-            f"O segredo indicado por {environment_variable} deve ter pelo menos 32 caracteres: {secret_path}"
+            f"O segredo indicado por {environment_variable} deve ter pelo menos 32 caracteres."
         )
     return value
 
@@ -559,10 +578,19 @@ class RedlineHandler(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("REDLINE_PORT", sys.argv[1] if len(sys.argv) > 1 else 8000))
-    host = os.environ.get("REDLINE_BIND_HOST", "127.0.0.1")
+    port = int(
+        os.environ.get("PORT")
+        or os.environ.get("REDLINE_PORT")
+        or (sys.argv[1] if len(sys.argv) > 1 else 8000)
+    )
+    host = os.environ.get(
+        "REDLINE_BIND_HOST",
+        "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1",
+    )
     if os.name == "nt" and any(
-        not os.environ.get(name, "").strip() for name in LOCAL_SECRET_NAMES
+        not os.environ.get(name, "").strip()
+        and not os.environ.get(SECRET_VALUE_NAMES[name], "").strip()
+        for name in LOCAL_SECRET_NAMES
     ):
         print(f"Segredos locais guardados em: {local_secret_path('REDLINE_ADMIN_KEY_FILE').parent}")
         print("A chave de administrador está no ficheiro admin_key dentro dessa pasta.")
