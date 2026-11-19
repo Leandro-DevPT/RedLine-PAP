@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f7f5">
+    <title>Administração | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/admin.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark" aria-hidden="true"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav" aria-label="Navegação principal">
+            <a href="./dashboard.html">Resumo</a>
+            <a href="./clientes.html">Clientes</a>
+            <a href="./appointments.html">Marcações</a>
+            <a href="./progresso.html">Atividade</a>
+            <a class="active" href="./admin.html" aria-current="page">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema" aria-label="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+
+    <main class="page-shell dashboard admin-page">
+        <section class="admin-heading">
+            <div>
+                <p class="eyebrow">Redline Agenda <span aria-hidden="true">/</span> Gestão</p>
+                <h1>Centro de controlo</h1>
+                <p class="lead">Gere acessos e mantém a agenda organizada num só lugar.</p>
+            </div>
+            <div class="admin-heading-note">
+                <span class="admin-heading-mark" aria-hidden="true">A</span>
+                <span>
+                    <strong>Área administrativa</strong>
+                    <small>Ferramentas de gestão</small>
+                </span>
+            </div>
+        </section>
+
+        <section class="panel admin-access" id="adminAccess" aria-labelledby="accessTitle">
+            <div class="admin-access-copy">
+                <span class="admin-lock-mark" aria-hidden="true">↗</span>
+                <p class="eyebrow">Acesso reservado</p>
+                <h2 id="accessTitle">Autentica-te para continuar</h2>
+                <p>Introduz a chave de administrador configurada no servidor para gerir contas e marcações.</p>
+                <span class="admin-secure-note">
+                    <span aria-hidden="true"></span>
+                    A sessão é mantida apenas neste separador
+                </span>
+            </div>
+            <form id="adminLoginForm" class="admin-login-form">
+                <div class="form-group">
+                    <label for="adminKey">Chave de administrador</label>
+                    <input id="adminKey" type="password" autocomplete="current-password" placeholder="Introduz a tua chave" required>
+                </div>
+                <button class="button" type="submit">
+                    Entrar na administração
+                    <span aria-hidden="true">→</span>
+                </button>
+                <p class="auth-message" id="adminMessage" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="admin-overview" id="adminOverview" aria-label="Resumo da administração" hidden>
+            <article class="admin-stat">
+                <span class="admin-stat-icon" aria-hidden="true">◎</span>
+                <div>
+                    <small>Contas registadas</small>
+                    <strong id="userCount">—</strong>
+                </div>
+                <span class="admin-stat-caption">na plataforma</span>
+            </article>
+            <article class="admin-stat">
+                <span class="admin-stat-icon" aria-hidden="true">✦</span>
+                <div>
+                    <small>Administradores</small>
+                    <strong id="adminCount">—</strong>
+                </div>
+                <span class="admin-stat-caption">com acesso total</span>
+            </article>
+            <article class="admin-stat">
+                <span class="admin-stat-icon" aria-hidden="true">▦</span>
+                <div>
+                    <small>Marcações</small>
+                    <strong id="appointmentCount">—</strong>
+                </div>
+                <span class="admin-stat-caption">na agenda</span>
+            </article>
+        </section>
+
+        <section class="panel users-panel" id="usersPanel" aria-labelledby="usersTitle" hidden>
+            <div class="panel-title admin-panel-title">
+                <div>
+                    <p class="eyebrow">Contas e permissões</p>
+                    <h2 id="usersTitle">Utilizadores</h2>
+                </div>
+                <button class="button secondary" id="refreshUsers" type="button">
+                    <span aria-hidden="true">↻</span>
+                    Atualizar dados
+                </button>
+            </div>
+            <div class="admin-toolbar">
+                <p>Consulta as contas registadas e ajusta o respetivo nível de acesso.</p>
+                <div class="admin-search">
+                    <label for="userSearch">Pesquisar utilizadores</label>
+                    <input id="userSearch" type="search" placeholder="Pesquisar por email..." autocomplete="off">
+                </div>
+            </div>
+            <div class="users-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">Perfil</th>
+                            <th scope="col">Data de criação</th>
+                            <th scope="col"><span class="visually-hidden">Ações</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersBody"></tbody>
+                </table>
+            </div>
+            <p class="auth-message" id="usersMessage" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel users-panel admin-appointments" id="appointmentsPanel" aria-labelledby="appointmentsTitle" hidden>
+            <div class="panel-title admin-panel-title">
+                <div>
+                    <p class="eyebrow">Agenda e operações</p>
+                    <h2 id="appointmentsTitle">Marcações</h2>
+                </div>
+                <button class="button secondary" id="refreshAppointments" type="button">
+                    <span aria-hidden="true">↻</span>
+                    Atualizar dados
+                </button>
+            </div>
+
+            <form class="appointment-form" id="appointmentForm">
+                <div class="appointment-form-heading">
+                    <h3>Adicionar marcação</h3>
+                    <p>Cria um compromisso diretamente na agenda.</p>
+                </div>
+                <div class="appointment-fields">
+                    <div class="form-group">
+                        <label for="appointmentTitle">Serviço</label>
+                        <input id="appointmentTitle" placeholder="Ex.: Consulta inicial" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentClient">
+                            Cliente <span>(opcional)</span>
+                        </label>
+                        <input id="appointmentClient" placeholder="Nome do cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Data</label>
+                        <input id="appointmentDate" type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Hora</label>
+                        <input id="appointmentTime" type="time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentStatus">Estado</label>
+                        <select id="appointmentStatus">
+                            <option>Agendado</option>
+                            <option>Confirmado</option>
+                            <option>Em curso</option>
+                            <option>Concluído</option>
+                            <option>Cancelado</option>
+                            <option>Faltou</option>
+                        </select>
+                    </div>
+                    <button class="button" type="submit">
+                        Adicionar marcação
+                        <span aria-hidden="true">+</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="admin-list-heading">
+                <div>
+                    <h3>Todas as marcações</h3>
+                    <p>Altera datas ou remove compromissos existentes.</p>
+                </div>
+            </div>
+            <div class="users-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Serviço</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col"><span class="visually-hidden">Ações</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsBody"></tbody>
+                </table>
+            </div>
+            <p class="auth-message" id="appointmentsMessage" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+</body>
+</html>

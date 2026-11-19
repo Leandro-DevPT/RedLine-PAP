@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/dashboard.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+</head>
+<body data-requires-admin="true">
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav">
+            <a class="active" href="./dashboard.html">Resumo</a>
+            <a href="./clientes.html">Clientes</a>
+            <a href="./appointments.html">Marcações</a>
+            <a href="./progresso.html">Atividade</a>
+            <a href="./admin.html">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+    <main class="page-shell dashboard">
+        <section class="dashboard-heading">
+            <div>
+                <p class="eyebrow">O teu negócio, num relance</p>
+                <h1>Bom dia, <span id="username">equipa</span>.</h1>
+                <p class="lead">Uma agenda simples para não perderes marcações nem o contexto dos teus clientes.</p>
+            </div>
+            <a class="button" href="./compromisso.html">+ Nova marcação</a>
+        </section>
+        <p class="form-message" id="dashboardMessage" role="status"></p>
+        <section class="stats-grid">
+            <article class="stat-card">
+                <span>Clientes ativos</span>
+                <strong id="activeClients">—</strong>
+                <small>Com contacto guardado</small>
+            </article>
+            <article class="stat-card">
+                <span>Marcações hoje</span>
+                <strong id="todayAppointments">—</strong>
+                <small id="todayDetail">A carregar agenda</small>
+            </article>
+            <article class="stat-card">
+                <span>Próximos 7 dias</span>
+                <strong id="weekAppointments">—</strong>
+                <small>Marcações não canceladas</small>
+            </article>
+            <article class="stat-card">
+                <span>Faltas este mês</span>
+                <strong id="missedAppointments">—</strong>
+                <small>Para acompanhar e reduzir</small>
+            </article>
+        </section>
+        <section class="dashboard-grid">
+            <article class="panel reveal">
+                <div class="panel-title">
+                    <h2>O que vem a seguir</h2>
+                    <a href="./appointments.html">Abrir agenda</a>
+                </div>
+                <div id="upcomingList" aria-live="polite"><p class="empty-state">A carregar...</p></div>
+            </article>
+            <article class="panel attention-panel reveal">
+                <p class="eyebrow">Atenção necessária</p>
+                <h2 id="attentionTitle">A carregar...</h2>
+                <p id="attentionText">A procurar marcações passadas por atualizar.</p>
+                <a class="button secondary" href="./appointments.html">Rever marcações</a>
+            </article>
+        </section>
+        <section class="dashboard-tip">
+            <span class="tip-mark" aria-hidden="true">i</span>
+            <p><strong>Menos faltas, mais previsibilidade.</strong> Regista o resultado de cada atendimento. Assim sabes quem faltou, quem precisa de reagendar e como está a tua semana.</p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/workspace.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/clientes.js" defer></script>
+</head>
+<body data-requires-admin="true">
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav">
+            <a href="./dashboard.html">Resumo</a>
+            <a class="active" href="./clientes.html">Clientes</a>
+            <a href="./appointments.html">Marcações</a>
+            <a href="./progresso.html">Atividade</a>
+            <a href="./admin.html">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+    <main class="page-shell workspace-page">
+        <section class="workspace-heading">
+            <div>
+                <p class="eyebrow">Relações de confiança</p>
+                <h1>Clientes</h1>
+                <p class="lead">Guarda os contactos e encontra rapidamente o contexto de cada pessoa.</p>
+            </div>
+            <button class="button" id="openClientModal" type="button">+ Novo cliente</button>
+        </section>
+        <section class="workspace-toolbar" aria-label="Pesquisar e filtrar clientes">
+            <input id="clientSearch" type="search" placeholder="Nome, email, telefone ou serviço" aria-label="Pesquisar clientes">
+            <select id="clientFilter" aria-label="Filtrar clientes">
+                <option value="Todos">Todos os estados</option>
+                <option value="Ativo">Ativos</option>
+                <option value="Em espera">Em espera</option>
+            </select>
+            <span id="clientCount" aria-live="polite">A carregar...</span>
+        </section>
+        <p class="form-message" id="clientMessage" role="status"></p>
+        <section class="client-list" id="clientsList" aria-live="polite"></section>
+    </main>
+    <div class="modal" id="clientModal" hidden>
+        <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clientModalTitle">
+            <div class="modal-head">
+                <div>
+                    <p class="eyebrow">Ficha de cliente</p>
+                    <h2 id="clientModalTitle">Novo cliente</h2>
+                </div>
+                <button class="icon-button" id="closeClientModal" type="button" aria-label="Fechar">×</button>
+            </div>
+            <form id="clientForm" class="form-grid">
+                <label>
+                    Nome
+                    <input id="clientName" required maxlength="120" autocomplete="name">
+                </label>
+                <label>
+                    Serviço habitual
+                    <input id="clientType" maxlength="120" placeholder="Ex.: explicações de matemática">
+                </label>
+                <label>
+                    Email
+                    <input id="clientEmail" type="email" maxlength="254" autocomplete="email">
+                </label>
+                <label>
+                    Telefone
+                    <input id="clientPhone" type="tel" maxlength="40" autocomplete="tel">
+                </label>
+                <label>
+                    Estado
+                    <select id="clientStatus">
+                        <option>Ativo</option>
+                        <option>Em espera</option>
+                    </select>
+                </label>
+                <div class="form-actions">
+                    <button class="button secondary" id="cancelClient" type="button">Cancelar</button>
+                    <button class="button" type="submit">Guardar cliente</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

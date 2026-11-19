@@ -1,0 +1,102 @@
+.admin-page { padding: 62px 0 88px; }
+.admin-page [hidden] { display: none !important; }
+.admin-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 34px; }
+.admin-heading .eyebrow span { padding: 0 5px; color: var(--muted); }
+.admin-heading h1 { margin-bottom: 15px; font-size: clamp(2.5rem, 5vw, 4.7rem); }
+.admin-heading .lead { margin-bottom: 0; }
+.admin-heading-note { display: flex; align-items: center; gap: 12px; margin-bottom: 9px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); white-space: nowrap; }
+.admin-heading-mark { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--red); font-weight: 800; }
+.admin-heading-note strong, .admin-heading-note small { display: block; }
+.admin-heading-note strong { font-size: .85rem; }
+.admin-heading-note small { margin-top: 2px; color: var(--muted); font-size: .76rem; }
+
+.admin-access { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(24px, 6vw, 76px); align-items: center; margin-bottom: 22px; padding: clamp(24px, 4vw, 42px); overflow: hidden; }
+.admin-access-copy { max-width: 470px; }
+.admin-lock-mark { display: grid; width: 42px; height: 42px; margin-bottom: 22px; place-items: center; border-radius: 6px; background: color-mix(in srgb, var(--red) 11%, var(--surface)); color: var(--red); font-size: 1.2rem; font-weight: 800; }
+.admin-access .eyebrow { margin-bottom: 10px; }
+.admin-access h2 { margin-bottom: 12px; font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.08; letter-spacing: -.055em; }
+.admin-access-copy > p:not(.eyebrow) { margin-bottom: 20px; color: var(--muted); }
+.admin-secure-note { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: .8rem; }
+.admin-secure-note > span { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.admin-login-form { padding: 22px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+.admin-login-form .form-group { margin: 0 0 14px; }
+.admin-login-form label, .appointment-form label { display: block; margin-bottom: 7px; font-size: .82rem; font-weight: 700; }
+.admin-login-form input, .appointment-form input, .appointment-form select, .admin-search input { width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--control-bg); color: var(--ink); }
+.admin-login-form input:focus, .appointment-form input:focus, .appointment-form select:focus, .admin-search input:focus, .role-select:focus, .appointment-date:focus, .appointment-time:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 14%, transparent); }
+.admin-login-form .button { width: 100%; gap: 10px; }
+.admin-login-form .auth-message { margin: 10px 0 0; }
+
+.admin-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
+.admin-stat { display: flex; align-items: center; gap: 14px; min-height: 112px; padding: 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.admin-stat-icon { display: grid; width: 42px; height: 42px; flex: 0 0 42px; place-items: center; border-radius: 6px; background: var(--paper); color: var(--red); font-size: 1.2rem; }
+.admin-stat > div { min-width: 0; }
+.admin-stat small, .admin-stat strong { display: block; }
+.admin-stat small { color: var(--muted); font-size: .8rem; }
+.admin-stat strong { margin-top: 2px; font-size: 1.8rem; line-height: 1.1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.admin-stat-caption { margin-left: auto; color: var(--muted); font-size: .73rem; text-align: right; }
+
+.users-panel { margin-top: 16px; padding: clamp(20px, 3vw, 30px); }
+.admin-panel-title { gap: 20px; padding-bottom: 18px; }
+.admin-panel-title .eyebrow { margin-bottom: 7px; }
+.admin-panel-title h2 { margin: 0; font-size: 1.65rem; }
+.admin-panel-title .button { gap: 8px; min-height: 40px; padding: 0 13px; font-size: .84rem; }
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; }
+.admin-toolbar > p { margin: 0; color: var(--muted); font-size: .88rem; }
+.admin-search { display: flex; align-items: center; gap: 12px; width: min(460px, 58%); }
+.admin-search label { flex: 0 0 auto; color: var(--muted); font-size: .8rem; font-weight: 700; }
+.admin-search input { min-height: 40px; }
+.users-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px; }
+.users-table-wrap table { width: 100%; border-collapse: collapse; text-align: left; }
+.users-table-wrap th, .users-table-wrap td { padding: 14px 15px; border-bottom: 1px solid var(--line); text-align: left; }
+.users-table-wrap tr:last-child td { border-bottom: 0; }
+.users-table-wrap th { background: var(--paper); color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.users-table-wrap td { font-size: .88rem; }
+.users-table-wrap td:first-child { font-weight: 700; }
+.role-select, .appointment-date, .appointment-time { min-height: 36px; padding: 0 9px; border: 1px solid var(--line); border-radius: 4px; background: var(--control-bg); color: var(--ink); }
+.save-role, .remove-user, .save-appointment, .delete-appointment { padding: 5px 3px; border: 0; background: transparent; cursor: pointer; font-size: .82rem; font-weight: 700; }
+.save-role, .save-appointment { margin-right: 10px; color: var(--green); }
+.remove-user, .delete-appointment { color: var(--red); }
+.empty-state { padding: 32px 12px !important; color: var(--muted); font-weight: 400 !important; text-align: center !important; }
+.auth-message { min-height: 1.3em; margin: 12px 0 0; color: var(--red); font-size: .85rem; }
+.auth-message.success { color: var(--green); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.admin-appointments { margin-top: 16px; }
+.appointment-form { margin: 22px 0 28px; padding: 20px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); }
+.appointment-form-heading h3, .admin-list-heading h3 { margin: 0; font-size: 1rem; letter-spacing: -.02em; }
+.appointment-form-heading p, .admin-list-heading p { margin: 4px 0 0; color: var(--muted); font-size: .82rem; }
+.appointment-fields { display: grid; grid-template-columns: 1.3fr 1fr 1fr .8fr 1fr auto; gap: 12px; align-items: end; margin-top: 18px; }
+.appointment-fields .form-group { min-width: 0; margin: 0; }
+.appointment-form label span { color: var(--muted); font-weight: 400; }
+.appointment-form .button { min-height: 44px; gap: 8px; white-space: nowrap; }
+.admin-list-heading { margin-bottom: 12px; }
+
+@media (max-width: 1000px) {
+    .appointment-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .appointment-fields .button { align-self: end; }
+    .admin-stat { flex-wrap: wrap; }
+    .admin-stat-caption { width: 100%; margin: -9px 0 0 56px; text-align: left; }
+}
+@media (max-width: 760px) {
+    .admin-page { padding-top: 42px; }
+    .admin-heading { align-items: flex-start; flex-direction: column; gap: 18px; margin-bottom: 24px; }
+    .admin-heading-note { margin: 0; }
+    .admin-access { grid-template-columns: 1fr; gap: 22px; }
+    .admin-lock-mark { margin-bottom: 16px; }
+    .admin-overview { grid-template-columns: 1fr; gap: 10px; }
+    .admin-stat { min-height: 86px; flex-wrap: nowrap; }
+    .admin-stat-caption { width: auto; margin: 0 0 0 auto; text-align: right; }
+    .admin-toolbar { align-items: stretch; flex-direction: column; gap: 12px; }
+    .admin-search { align-items: stretch; flex-direction: column; gap: 6px; width: 100%; }
+    .admin-panel-title { align-items: flex-start; }
+    .admin-panel-title .button { flex: 0 0 auto; }
+    .appointment-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .users-table-wrap { margin-right: -2px; }
+}
+@media (max-width: 480px) {
+    .admin-panel-title { flex-direction: column; }
+    .admin-panel-title .button { width: 100%; }
+    .appointment-fields { grid-template-columns: 1fr; }
+    .admin-stat-caption { font-size: .68rem; }
+    .users-table-wrap th, .users-table-wrap td { padding: 12px 10px; }
+}

@@ -1,0 +1,26 @@
+.dashboard { padding: 70px 0; }
+.dashboard-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 42px; }
+.dashboard-heading h1 { font-size: clamp(2.6rem, 5vw, 5rem); margin-bottom: 18px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-card, .panel { padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.stat-card span, .stat-card small { display: block; color: var(--muted); }
+.stat-card strong { display: block; margin: 12px 0 4px; font-size: 2.4rem; letter-spacing: -.07em; }
+.stat-card small { margin-top: 5px; }
+.dashboard-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 16px; margin-top: 16px; }
+.panel-title { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.panel-title a { color: var(--red); font-size: .85rem; font-weight: 700; }
+.appointment { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.appointment:last-child { border-bottom: 0; }.time { font-weight: 800; }.appointment small { display: block; color: var(--muted); }.appointment i { padding: 5px 8px; background: var(--line); color: var(--muted); border-radius: 3px; font-size: .72rem; font-style: normal; }
+.attention-panel { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.attention-panel h2 { margin-bottom: 10px; }
+.attention-panel p:not(.eyebrow) { color: var(--muted); }
+.dashboard-tip { display: flex; align-items: flex-start; gap: 14px; margin-top: 16px; padding: 20px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }
+.dashboard-tip p { margin: 0; }
+.dashboard-tip strong { color: var(--ink); }
+.tip-mark { display: grid; width: 25px; height: 25px; flex: 0 0 25px; place-items: center; border-radius: 50%; background: var(--line); color: var(--red); font-weight: 800; }
+.appointment-card { grid-template-columns: 64px minmax(0, 1fr) 150px auto; }
+.appointment-status { min-height: 38px; padding: 0 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--control-bg); color: var(--ink); }
+.appointment-actions { display: flex; align-items: center; gap: 10px; }
+.appointment-notes { padding-top: 5px; }
+@media (max-width: 1000px) { .stats-grid { grid-template-columns: repeat(2, 1fr); }.appointment-card { grid-template-columns: 56px minmax(0, 1fr) 140px; }.appointment-actions { grid-column: 2 / -1; justify-content: flex-end; } }
+@media (max-width: 760px) { .dashboard { padding-top: 48px; }.dashboard-heading { align-items: flex-start; flex-direction: column; }.stats-grid, .dashboard-grid { grid-template-columns: 1fr; }.appointment { grid-template-columns: 56px 1fr; }.appointment i { grid-column: 2; width: max-content; }.appointment-card { grid-template-columns: 52px 1fr; }.appointment-status, .appointment-actions { grid-column: 2; }.appointment-actions { justify-content: flex-start; flex-wrap: wrap; } }

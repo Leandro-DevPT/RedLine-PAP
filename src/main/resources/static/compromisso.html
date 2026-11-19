@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova marcação | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/workspace.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/compromisso.js" defer></script>
+</head>
+<body data-requires-admin="true">
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav">
+            <a href="./dashboard.html">Resumo</a>
+            <a href="./clientes.html">Clientes</a>
+            <a class="active" href="./appointments.html">Marcações</a>
+            <a href="./progresso.html">Atividade</a>
+            <a href="./admin.html">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+    <main class="page-shell workspace-page">
+        <section class="workspace-heading">
+            <div>
+                <p class="eyebrow">Agenda de serviços</p>
+                <h1 id="appointmentHeading">Nova marcação</h1>
+                <p class="lead" id="appointmentLead">Reserva o horário, associa o cliente e guarda o contexto necessário.</p>
+            </div>
+            <a class="button secondary" href="./appointments.html">Voltar à agenda</a>
+        </section>
+        <section class="form-shell">
+            <form id="appointmentForm">
+                <div class="form-grid">
+                    <label>
+                        Serviço ou motivo
+                        <input name="title" id="appointmentTitle" required maxlength="160" placeholder="Ex.: explicação de matemática">
+                    </label>
+                    <label>
+                        Cliente
+                        <select name="clientId" id="appointmentClient">
+                            <option value="">Sem cliente associado</option>
+                        </select>
+                    </label>
+                    <label>
+                        Data
+                        <input name="date" id="appointmentDate" type="date" required>
+                    </label>
+                    <label>
+                        Hora
+                        <input name="time" id="appointmentTime" type="time" required>
+                    </label>
+                    <label>
+                        Duração
+                        <select name="durationMinutes" id="appointmentDuration">
+                            <option value="30">30 minutos</option>
+                            <option value="45">45 minutos</option>
+                            <option value="60" selected>1 hora</option>
+                            <option value="90">1 hora e 30 minutos</option>
+                            <option value="120">2 horas</option>
+                        </select>
+                    </label>
+                    <label>
+                        Estado
+                        <select name="status" id="appointmentStatus">
+                            <option>Agendado</option>
+                            <option>Confirmado</option>
+                            <option>Em curso</option>
+                            <option>Concluído</option>
+                            <option>Cancelado</option>
+                            <option>Faltou</option>
+                        </select>
+                    </label>
+                    <label class="full-width">
+                        Notas
+                        <textarea name="notes" id="appointmentNotes" maxlength="1000" placeholder="Preparação, materiais ou informação importante para o atendimento"></textarea>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <a class="button secondary" href="./appointments.html">Cancelar</a>
+                    <button class="button" id="saveAppointmentButton" type="submit">Guardar marcação</button>
+                </div>
+                <p class="form-message" id="appointmentMessage" role="status"></p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

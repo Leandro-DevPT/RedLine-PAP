@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/workspace.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/progresso.js" defer></script>
+</head>
+<body data-requires-admin="true">
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav">
+            <a href="./dashboard.html">Resumo</a>
+            <a href="./clientes.html">Clientes</a>
+            <a href="./appointments.html">Marcações</a>
+            <a class="active" href="./progresso.html">Atividade</a>
+            <a href="./admin.html">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+    <main class="page-shell workspace-page">
+        <section class="workspace-heading">
+            <div>
+                <p class="eyebrow">Decisões com contexto</p>
+                <h1>Atividade</h1>
+                <p class="lead">Percebe o que foi concluído, o que está marcado e onde há faltas.</p>
+            </div>
+            <a class="button" href="./compromisso.html">+ Nova marcação</a>
+        </section>
+        <p class="form-message" id="progressMessage" role="status"></p>
+        <section class="progress-layout">
+            <article class="progress-overview">
+                <p class="eyebrow">Taxa de conclusão</p>
+                <strong class="progress-number" id="completionPercent">—</strong>
+                <p id="completionDescription">A carregar marcações...</p>
+                <div class="progress-track-large"><span id="completionBar" style="width: 0%"></span></div>
+                <small id="progressUpdated"></small>
+            </article>
+            <article class="delivery-panel">
+                <p class="eyebrow">Próximas marcações</p>
+                <h2>O que vem aí</h2>
+                <div id="deliveryList"><p class="empty-state">A carregar...</p></div>
+            </article>
+        </section>
+        <section class="metric-cards">
+            <article class="metric-card">
+                <span>Concluídas</span>
+                <strong id="completedValue">—</strong>
+            </article>
+            <article class="metric-card">
+                <span>Marcadas</span>
+                <strong id="plannedValue">—</strong>
+            </article>
+            <article class="metric-card">
+                <span>Faltas</span>
+                <strong id="missedValue">—</strong>
+            </article>
+            <article class="metric-card">
+                <span>Canceladas</span>
+                <strong id="cancelledValue">—</strong>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

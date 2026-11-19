@@ -1,0 +1,62 @@
+services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    expose:
+      - "8000"
+    environment:
+      REDLINE_ADMIN_KEY_FILE: /run/secrets/admin_key
+      REDLINE_SESSION_SECRET_FILE: /run/secrets/session_secret
+    secrets:
+      - admin_key
+      - session_secret
+    volumes:
+      - app_data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16M,noexec,nosuid
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      DOMAIN: ${DOMAIN:?Run deploy/init-secrets.sh with your domain first}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  app_data:
+  caddy_data:
+  caddy_config:
+
+secrets:
+  admin_key:
+    file: ./secrets/admin_key
+  session_secret:
+    file: ./secrets/session_secret

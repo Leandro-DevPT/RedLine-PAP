@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcações | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/workspace.css">
+    <script src="./js/api.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/appointments.js" defer></script>
+</head>
+<body data-requires-admin="true">
+    <header class="site-header">
+        <a class="brand" href="./dashboard.html">
+            <span class="brand-mark"></span>
+            REDLINE
+            <span class="brand-subtitle">AGENDA</span>
+        </a>
+        <nav class="site-nav">
+            <a href="./dashboard.html">Resumo</a>
+            <a href="./clientes.html">Clientes</a>
+            <a class="active" href="./appointments.html">Marcações</a>
+            <a href="./progresso.html">Atividade</a>
+            <a href="./admin.html">Acesso</a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+            <a class="logout-link" href="./index.html">Sair</a>
+        </nav>
+    </header>
+    <main class="page-shell dashboard">
+        <section class="dashboard-heading">
+            <div>
+                <p class="eyebrow" id="agendaDate">Agenda</p>
+                <h1>Marcações</h1>
+                <p class="lead">Vê o que vem a seguir e regista faltas ou conclusões no momento.</p>
+            </div>
+            <a class="button" href="./compromisso.html">+ Nova marcação</a>
+        </section>
+        <section class="panel">
+            <div class="panel-title">
+                <h2>Agenda de serviços</h2>
+                <span id="agendaStatus" aria-live="polite">A carregar...</span>
+            </div>
+            <div class="workspace-toolbar appointment-filters" aria-label="Filtrar marcações">
+                <input id="appointmentSearch" type="search" placeholder="Pesquisar serviço ou cliente" aria-label="Pesquisar marcações">
+                <input id="appointmentDateFilter" type="date" aria-label="Filtrar por dia">
+                <select id="appointmentStatusFilter" aria-label="Filtrar por estado">
+                    <option value="Todas">Todos os estados</option>
+                    <option>Agendado</option>
+                    <option>Confirmado</option>
+                    <option>Em curso</option>
+                    <option>Concluído</option>
+                    <option>Cancelado</option>
+                    <option>Faltou</option>
+                </select>
+                <button class="button secondary" id="clearAppointmentFilters" type="button">Limpar</button>
+            </div>
+            <div id="appointmentsList" aria-live="polite"></div>
+        </section>
+        <p class="form-message" id="appointmentListMessage" role="status"></p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Redline Agenda</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/auth.js" defer></script>
+</head>
+<body class="auth-page">
+    <aside class="auth-intro">
+        <div>
+            <a class="brand" href="./index.html">
+                <span class="brand-mark"></span>
+                REDLINE
+                <span class="brand-subtitle">AGENDA</span>
+            </a>
+            <button class="theme-toggle" type="button" title="Alternar tema">◐</button>
+        </div>
+        <div>
+            <p class="eyebrow">Gestão sem ruído</p>
+            <h1>Uma agenda simples para atender melhor.</h1>
+            <p>Marcações, clientes e resultados reunidos para pequenos prestadores de serviços.</p>
+        </div>
+        <small>Segurança em duas etapas, por defeito.</small>
+    </aside>
+    <main class="auth-form">
+        <div class="form-box">
+            <p class="eyebrow">Área reservada</p>
+            <h2>Entrar na agenda</h2>
+            <p>Usa a tua conta autorizada para gerir clientes e marcações.</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email profissional</label>
+                    <input type="email" id="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Palavra-passe</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+                <button class="button" type="submit">Continuar</button>
+            </form>
+
+            <section class="auth-step" id="authyCodeStep" hidden>
+                <h3>Confirma o segundo fator</h3>
+                <p>Abre a app Authy e introduz o código de 6 dígitos.</p>
+                <div class="form-group">
+                    <label for="authyCode">Código de segurança</label>
+                    <input class="code-input" id="authyCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code">
+                </div>
+                <button class="button" type="button" id="verifyAuthyButton">Verificar e entrar</button>
+            </section>
+
+            <p class="auth-message" id="authMessage" role="status"></p>
+            <p class="form-link">
+                Ainda não tens conta?
+                <a href="./register.html">Criar conta</a>
+            </p>
+        </div>
+    </main>
+</body>
+</html>

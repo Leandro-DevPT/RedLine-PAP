@@ -1,0 +1,6 @@
+.env
+secrets/
+main/resources/data/*.json
+**/__pycache__/
+**/*.py[cod]
+.mpTotp.java
